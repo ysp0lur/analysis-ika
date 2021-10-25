@@ -1,5 +1,5 @@
-import { ValidationPipe } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
+import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
+import { NestFactory, Reflector } from '@nestjs/core';
 import { useContainer } from 'class-validator';
 import { TrimStringsPipe } from './modules/common/transformer/trim-strings.pipe';
 import { AppModule } from './modules/main/app.module';
@@ -10,7 +10,19 @@ async function bootstrap() {
   setupSwagger(app);
   app.setGlobalPrefix('api/v1');
   app.enableCors();
-  app.useGlobalPipes(new TrimStringsPipe(), new ValidationPipe());
+  /**
+  * Guardas globales
+  */
+  app.useGlobalPipes(new TrimStringsPipe(), new ValidationPipe({
+    transform: true,
+    whitelist: true,
+    // disableErrorMessages: true,
+    transformOptions: {
+      enableImplicitConversion: true
+    }
+  }));
+  
+  app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
   await app.listen(3000);
 }

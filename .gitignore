@@ -2,6 +2,7 @@
 node_modules/
 /postgres_data
 /pgadmin
+src/scripts/__pycache__/
 
 # IDE
 /.vscode
@@ -15,7 +16,7 @@ yarn-error.log
 
 # environment
 .env
-
+*.pyc
 # build
 /dist
 

@@ -1,3 +1,4 @@
+import { AlgorithmsModule } from '@src/modules/algorithms/algorithms.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule, TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
 import { AuthModule } from './../auth';
@@ -27,6 +28,7 @@ import { AppService } from './app.service';
     ConfigModule,
     AuthModule,
     CommonModule,
+    AlgorithmsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

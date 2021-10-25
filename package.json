@@ -40,6 +40,7 @@
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "pg": "^8.7.1",
+    "python-shell": "^3.0.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.3.0",
     "swagger-ui-express": "^4.1.6",

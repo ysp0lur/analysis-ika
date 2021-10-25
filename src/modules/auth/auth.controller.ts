@@ -7,7 +7,7 @@ import { CurrentUser } from './../common/decorator/current-user.decorator';
 import { UserEntity, UsersService } from './../user';
 
 @Controller('auth')
-@ApiTags('authentication')
+@ApiTags('Authentication')
 export class AuthController {
   constructor(
     private readonly authService: AuthService,

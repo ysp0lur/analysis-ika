@@ -28,7 +28,7 @@ export class AuthController {
     };
   }
 
-  @Post('register')
+  @Post('signup')
   @ApiResponse({ status: 201, description: 'Successful Registration' })
   @ApiResponse({ status: 400, description: 'Bad Request' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })

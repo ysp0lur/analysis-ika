@@ -2,26 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { CreatePsoAlgorithmDto, UpdatePsoAlgorithmDto } from '../dto/create-pso-algorithm.dto';
 import { PythonShell } from 'python-shell';
 import { Options } from 'python-shell';
+import { CreateADPsoAlgorithmDto } from '../dto/create-ad-pso-algorithm.dto';
 
 @Injectable()
 export class PsoAlgorithmService {
-  async test(): Promise<any> {
-    const options: Options = {
-      mode: 'text',
-      // pythonPath: 'path/to/python',
-      pythonOptions: ['-u'],
-      scriptPath: 'src/scripts',
-      // args: [code],
-   };
-     const result = await new Promise((resolve, reject) => {
-       PythonShell.run('init.py', options, (err, results) => {
-         if (err) return reject(err);
-         return resolve(results);
-       });
-     });
-     console.log(result);
-     return result[0];
-  }
 
   async calculatePSORandom(createAlgorithmDto: CreatePsoAlgorithmDto): Promise<any> {
     console.log(createAlgorithmDto);
@@ -49,12 +33,34 @@ export class PsoAlgorithmService {
       ],
    };
      const result = await new Promise((resolve, reject) => {
-       PythonShell.run('functionRandom.py', options, (err, results) => {
+       PythonShell.run('PSO.py', options, (err, results) => {
          if (err) return reject(err);
          return resolve(results);
        });
      });
      console.log(result);
+     return result;
+  }
+ 
+  async calculateAD_PSO(createAlgorithmAD_PSO_Dto: CreateADPsoAlgorithmDto): Promise<any> {
+    console.log(createAlgorithmAD_PSO_Dto);
+    
+    const options: Options = {
+      mode: 'json',
+      // pythonPath: 'path/to/python',
+      pythonOptions: ['-u'],
+      scriptPath: 'src/scripts',
+      args: [
+        createAlgorithmAD_PSO_Dto.e.toString(),
+        createAlgorithmAD_PSO_Dto.w.toString()
+      ],
+   };
+     const result = await new Promise((resolve, reject) => {
+       PythonShell.run('AD-PSO.py', options, (err, results) => {
+         if (err) return reject(err);
+         return resolve(results);
+       });
+     });
      return result;
   }
 }

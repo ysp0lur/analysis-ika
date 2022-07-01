@@ -8,6 +8,7 @@
     "format": "prettier --write \"src/**/*.ts\"",
     "start": "ts-node -r tsconfig-paths/register src/main.ts",
     "start:dev": "nodemon",
+    "build": "nest build",
     "nest:dev": "nest start --watch",
     "start:debug": "nodemon --config nodemon-debug.json",
     "prestart:prod": "rm -rf dist && tsc",
@@ -23,7 +24,14 @@
     "migration:create": "typeorm migration:create -d src/migrations",
     "migrations:generate": "npm run typeorms -- migration:generate -n",
     "migration:run": "yarn ts-typeorm migration:run",
-    "migration:revert": "yarn ts-typeorm migration:revert"
+    "migration:revert": "yarn ts-typeorm migration:revert",
+    "build:dev": "npm run build && pm2 start ecosystem.config.js",
+    "build:daemon": "npm run build && pm2 start ecosystem.config.js --env production",
+    "kill-ps": "pm2 stop Analysis-API-v1 && pm2 delete Analysis-API-v1",
+    "build-docker:dev": "docker-compose --env-file ./.env.development up & npm run build:dev",
+    "build-docker:prod": "docker-compose --env-file ./.env.production up & npm run build:daemon",
+    "kill-ps-docker:dev": "pm2 stop Analysis-API-v1 && pm2 delete Analysis-API-v1 && docker-compose --env-file ./.env.development down",
+    "kill-ps-docker:prod": "pm2 stop Analysis-API-v1 && pm2 delete Analysis-API-v1 && docker-compose --env-file ./.env.production down"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.6",

@@ -44,6 +44,27 @@ export class UserEntity {
   })
   password: string;
 
+  @Column({ name: 'selected_activity', type: 'varchar', length: '150', nullable: false })
+  selectedActivity: string;
+
+  @Column({ name: 'system_type_use', type: 'varchar', length: '150', nullable: false })
+  systemTypeUse: string;
+
+  @Column({ type: 'varchar', length: '150', nullable: false })
+  institution: string;
+
+  @Column({ type: 'varchar', length: '150', nullable: false })
+  orcid: string;
+
+  @Column({ name: 'username', type: 'varchar', length: '150', nullable: false })
+  userName: string;
+
+  @Column({ name: 'signature_filename', type: 'varchar', length: '50', nullable: false })
+  signatureFilename: string;
+
+  @Column({ name: 'signature_path', type: 'varchar', length: '250', nullable: false })
+  signaturePath: string;
+
   // Control fields
   @Exclude()
   @CreateDateColumn({ name: 'created_at', type: 'timestamptz', default: () => { return 'CURRENT_TIMESTAMP'; } })
@@ -68,4 +89,12 @@ export class UserFillableFields {
   firstName: string;
   lastName: string;
   password: string;
+  role?: Roles;
+  selectedActivity: string;
+  systemTypeUse: string;
+  institution: string;
+  orcid: string;
+  userName: string;
+  signatureFilename: string;
+  signaturePath: string;
 }

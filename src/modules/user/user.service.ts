@@ -19,7 +19,24 @@ export class UsersService {
     return await this.userRepository.findOne({ email });
   }
 
-  async create(payload: UserFillableFields) {
+  async create(payload: any, file: any) {
+    let data: UserFillableFields = {
+      firstName: payload.firstName,
+      lastName: payload.lastName,
+      email: payload.email,
+      password: payload.password,
+      selectedActivity: payload.selectedActivity,
+      systemTypeUse: payload.systemTypeUse,
+      institution: payload.institution,
+      orcid: payload.orcid,
+      userName: payload.userName,
+      signatureFilename: file.originalname,
+      signaturePath: file.filename,
+    }
+    if (payload.role) {
+      data.role = payload.role;
+    }
+    
     const user = await this.getByEmail(payload.email);
 
     if (user) {
@@ -28,6 +45,6 @@ export class UsersService {
       );
     }
 
-    return await this.userRepository.save(payload);
+    return await this.userRepository.save(data);
   }
 }

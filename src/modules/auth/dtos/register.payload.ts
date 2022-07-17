@@ -42,4 +42,57 @@ export class RegisterPayload {
   @ApiProperty({ required: true })
   @SameAs('password')
   passwordConfirmation: string;
+
+  @IsString()
+  @ApiProperty({
+    required: true,
+  })
+  @IsNotEmpty()
+  @MaxLength(150)
+  selectedActivity: string;
+
+  @IsString()
+  @ApiProperty({
+    required: true,
+  })
+  @IsNotEmpty()
+  @MaxLength(150)
+  systemTypeUse: string;
+
+  @IsString()
+  @ApiProperty({
+    required: true,
+  })
+  @IsNotEmpty()
+  @MaxLength(150)
+  institution: string;
+
+  @IsString()
+  @ApiProperty({
+    required: true,
+  })
+  @IsNotEmpty()
+  @MaxLength(150)
+  orcid: string;
+
+  @IsString()
+  @ApiProperty({
+    required: true,
+  })
+  @IsNotEmpty()
+  @MaxLength(150)
+  userName: string;
+
+  @IsNotEmpty()
+  @IsString()
+  @MaxLength(250)
+  @ApiProperty()
+  readonly signatureFilename: string;
+  
+  @IsNotEmpty()
+  @IsString()
+  @MaxLength(250)
+  @ApiProperty()
+  readonly signaturePath: string;
+
 }

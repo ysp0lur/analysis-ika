@@ -3,6 +3,7 @@ node_modules/
 /postgres_data
 /pgadmin
 src/scripts/__pycache__/
+/uploads/**/*
 
 # IDE
 /.vscode
